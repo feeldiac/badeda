@@ -53,7 +53,7 @@ Existen 3 tipos de modelos:
 
 #### Modelo Conceptual
 
-Identifica las relaciones de más alto nivel entre las diferentes entidades.Las características del modelo conceptual de datos incluyen:
+Identifica las relaciones de más alto nivel entre las diferentes entidades.Las características del modelo conceptual de datos incluyen. En este se basa el **modelo Entidad-Relación**:
 - Incluye las entidades importantes y las relaciones entre ellas. [1] 
 - No se especifica ningún atributo.
 - No se especifica ninguna clave principal.
@@ -76,6 +76,62 @@ Un modelo de datos físico introduce el contexto específico de la base de datos
 Explica técnicamente cómo se van a almacenar los datos. Explica la implementación en el sistema de bases de datos. Describe el _cómo_.
 
 *Arquitectura cliente-servidor: MySQL Server - MySQL Workbench*
+
+## Modelado de bases de datos
+
+Como vimos es el primer paso dentro de una implementación de una base de datos. Es importante porque no solo vamos a plasmar los requerimientos de aplicaciones sino que también vamos a traducir las reglas o restricciones que deben cumplir los datos.
+
+### Modelo entidad-relación
+
+El modelo de datos entidad-relación se basa en una percepción del mundo real, que consiste en un conjunto de objetos básicos llamados entidades y de relaciones entre ellos. Se emplea para interpretar, especificar y documentar los requerimientos para los sistemas de bases de datos.
+
+#### Entidades
+
+Una entidad es un objeto, real o abstracto, acerca del cual se recoge información de interés para la base de datos. Se representan usando **rectángulos**.
+
+- Entidades fuertes: existen por sí mismas (ej: empleados).
+- Entidades débiles: su existencia depende de otra entidad (ej: hijos de empleados).
+
+**Ocurrencia de entidad**: es una _instancia_ de la entidad. Por ejemplo: si tenemos la entidad persona, una ocurrencia puede ser Pepe Pérez.
+
+#### Atributos
+
+Los atributos describen las características de una entidad.  Por ejemplo: para la entidad Cliente existirían atributos como nombre, domicilio, teléfono. Para representarlos **se listan dentro del rectángulo** de la entidad.
+
+Tipos:
+- Atributo con simple valor: es un valor simple.
+- Atributo multivalor: corresponde a una serie de valores.
+- Atributo derivado: su valor se puede derivar otro atributo afin.
+- Atributo clave: identifica una ocurrencia en particular, diferencia los ítems entre sí.
+- Atributo nulo: cuando el valor es desconocido o no tiene valor.
+
+**Datos**: son los posibles valores que pueden tener los atributos. 
+
+#### Convención de nombres
+
+Para nombrar entidades y atributos se debe utilizar sustantivos en singular o plural. No se puede utilizar eñes, espacios o acentos. Si el nombre lleva más de una palabra se debe usar snake case o camel case.
+
+#### Claves
+
+- Clave candidata
+
+Aquella que identifica de forma unívoca a cada ocurrencia. Dichas claves son candidatas a ser clave primaria. Se pueden definir varias y luego seleccionar la más adecuada.
+
+- Clave primaria
+
+Se compone de uno o más atributos cuyos valores identifican unívocamente a cada ocurrencia. No tiene valores nulos ni repetidos. Identifica cada fila de una tabla de forma única. Se representa escribiéndola en negrita seguido de las iniciales PK (Primary Key) entre paréntesis.
+
+-Superclave
+
+Conjunto de uno o más atributos que, tomados colectivamente, permiten identificar de forma unívoca a la ocurrencia de una entidad. Se utiliza generalmente en las tablas de relación.
+
+### Caso de ejemplo: UBER
+
+![Caso-uber-modelo-e-r](https://user-images.githubusercontent.com/75231007/157333739-fe592d7a-1ee1-4fbf-a933-3c758eefb29a.png)
+
+### Caso de ejemplo: UBER
+
+![Caso-estudio-Playground-diagrama-e-r](https://user-images.githubusercontent.com/75231007/157337296-04f7dec0-baec-40f4-8205-9adf5135a3a7.png)
 
 ## Referencias
 
