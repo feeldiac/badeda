@@ -169,7 +169,20 @@ Los atributos de la base de datos deben tener un tipo de dato en específico. Cu
 | Fecha   | TIME | Almacena solamente la hora en formato HH:MM:SS | ['00:00:00', '23:59:59']
 | Fecha   | DATETIME | Almacena la fecha y la hora en formato YYYY-MM-DD HH:MM:SS | ['0001-01-01 00:00:00', '9999-12-31 23:59:59']
 
+### Relaciones
 
+Las relaciones indican cómo se van a relacionar dos tablas. Existen tres tipos de relaciones. Para identificar correctamente las relaciones sirve plantear ejemplos concretos para ver cómo interactuan las dos entidades. Es decir, podemos preguntarnos _¿cuántas entidad1 puede tener la entidad2? y viceversa_.
+
+La **cardinalidad** se refiere al tipo de relación (1:1, 1:M, N:M).
+
+- Uno a uno (1:1): Se coloca la clave primaria de una entidad en la tabla de la otra entidad y se indica que es una clave foránea (FK). 
+
+- Uno a muchos (1:N): Se coloca la clave primaria de la entidad _del lado 1_ en la tabla de _muchos_. 
+
+- Muchos a muchos (N:M): Se crea una nueva tabla (intermedia) que se suele nombrar componiendo los nombres de las dos tablas iniciales a relacionar; como atributos se le agrega un identificador (PK) y como llaves foráneas se pasarán las llaves primarias de las entidades iniciales.
+
+Tipo de flechas
+![image](https://user-images.githubusercontent.com/75231007/158664782-cf322004-4886-4a9c-82d9-6837989be3fa.png)
 
 ## Referencias
 
