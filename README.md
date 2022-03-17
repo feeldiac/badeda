@@ -192,6 +192,14 @@ Las sentencias SQL se agrupan en dos categorías según su funcionalidad o prop�
 
 - Lenguaje de manipulación de datos (DML): son sentencias para la consulta, actualización y borrado de datos. Es decir, se utilizan para realizar consultas y modificaciones sobre los registros almacenados dentro de cada una de las tablas.
 
+**Buenas prácticas 🥇**
+
+- Utilizar mayúsculas para las palabras clave del lenguaje. 
+
+**Tips de Workbench**
+
+- Podemos importar una base de datos directamente desde un archivo .sql, para ello seguimos la siguiente ruta: Server :point_right: Data Import :point_right: Import from Self-Contained File.
+
 ### Create, Drop, Alter
 
 - Crear una base de datos:
@@ -238,7 +246,8 @@ DROP TABLE IF EXIST nombreTabla;
       ALTER TABLE peliculas
       DROP rating;
       ```
-     
+
+
 ### Insert, update, delete
 
 - Insertar datos a una tabla (INSERT). Existen dos formas:
@@ -269,6 +278,57 @@ WHERE condición;
 ```
 DELETE FROM nombre_tabla WHERE condición;
 ```
+### Select
+
+Su funcionalidad es la de realizar consultas sobre una  o varias columnas de una tabla. Para especificar sobre qué tabla queremos realizar esa consulta usamos la palabra FROM seguida del nombre de la tabla. Con este comando podemos también modificar lo que visualizamos sin alterar los datos, por ejemplo, multiplicar los datos de una columna por algún valor.
+
+```
+SELECT nombre_columna, nombre_columna, ...
+FROM nombre_tabla;
+```
+
+### WHERE y ORDER BY
+
+La funcionalidad del WHERE es la de condicionar y filtrar las consultas SELECT que se realizan a una base de datos.
+
+```
+SELECT nombre_columna_1, nombre_columna_2, ...
+FROM nombre_tabla
+WHERE condicion;
+```
+
+```
+SELECT primer_nombre, apellido
+FROM clientes
+WHERE pais <> ‘Argentina’;
+```
+
+ORDER BY se utiliza para ordenar los resultados de una consulta según el valor de la columna especificada. Por defecto, se ordena de forma ascendente (ASC) según los valores de la columna. También se puede ordenar de manera descendente (DESC) aclarándolo en la consulta.
+
+```
+SELECT nombre_columna1, nombre_columna2
+FROM tabla
+WHERE condicion
+ORDER BY nombre_columna1;
+```
+
+```
+SELECT nombre, rating
+FROM artistas
+WHERE rating > 1.0
+ORDER BY nombre DESC;
+```
+
+#### Operadores
+
+![image](https://user-images.githubusercontent.com/75231007/158905580-ce429428-1441-4442-b0c3-214fce7cfad5.png)
+
+![image](https://user-images.githubusercontent.com/75231007/158905593-2e9b1ab5-eabf-44ee-ab56-298bb6b9a05a.png)
+
+![image](https://user-images.githubusercontent.com/75231007/158905605-0180da12-5fd8-4f0a-a26c-a8145fece30e.png)
+
+![image](https://user-images.githubusercontent.com/75231007/158905647-6435d377-5411-44a4-8287-5eade293bfbb.png)
+
 
 ## Referencias
 
