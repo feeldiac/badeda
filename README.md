@@ -184,6 +184,92 @@ La **cardinalidad** se refiere al tipo de relación (1:1, 1:M, N:M).
 Tipo de flechas
 ![image](https://user-images.githubusercontent.com/75231007/158664782-cf322004-4886-4a9c-82d9-6837989be3fa.png)
 
+## SQL 
+
+Las sentencias SQL se agrupan en dos categorías según su funcionalidad o propósito:
+
+- Lenguaje de definición de datos (DDL): son sentencias para la creación de tablas y registros. Es decir, se utilizan para realizar modificaciones sobre la estructura de la base de datos.
+
+- Lenguaje de manipulación de datos (DML): son sentencias para la consulta, actualización y borrado de datos. Es decir, se utilizan para realizar consultas y modificaciones sobre los registros almacenados dentro de cada una de las tablas.
+
+### Create, Drop, Alter
+
+- Crear una base de datos:
+
+```
+CREATE DATABASE miprimerabasededatos;
+USE miprimerabasededatos;
+```
+
+- Crear una tabla:
+
+```
+CREATE TABLE nombre_de_la_tabla (
+    nombre_de_la_columna_1 TIPO_DE_DATO CONSTRAINT,
+    nombre_de_la_columna_2 TIPO_DE_DATO CONSTRAINT
+)
+```
+**Llaves foráneas**: Cuando creemos una columna que contenga una id foránea, será necesario usar la sentencia FOREIGN KEY para aclarar a qué tabla y a qué columna hace referencia aquel dato.
+
+- Borrar tabla (DROP table):
+
+```
+DROP TABLE IF EXIST nombreTabla;
+```
+
+- Alterar una tabla existente (ALTER table), maneja 3 comandos:
+   - ADD: para agregar una columna. 
+   
+      ```
+      ALTER TABLE peliculas
+      ADD rating DECIMAL(3,1) NOT NULL;
+      ```
+   
+   - MODIFY: para modificar una columna.
+      
+      ```
+      ALTER TABLE peliculas
+      MODIFY rating DECIMAL(4,1) NOT NULL;
+      ```
+   
+   - DROP: para borrar una columna.
+      
+      ```
+      ALTER TABLE peliculas
+      DROP rating;
+      ```
+     
+### Insert, update, delete
+
+- Insertar datos a una tabla (INSERT). Existen dos formas:
+   - Insertando datos en todas las columnas: Si estamos insertando datos en todas las columnas, no hace falta aclarar los nombres de cada columna. Sin embargo, el orden en el  que insertemos los valores, deberá ser el mismo orden que tengan asignadas las columnas en la tabla. 
+      
+      ```
+      INSERT INTO table_name (columna_1, columna_2, columna_3, ...)
+      VALUES (valor_1, valor_2, valor_3, ...);
+      ```
+      
+   - Insertando datos en las columnas que especifiquemos.
+
+      ```
+      INSERT INTO table_name (columnaX, columnaY) 
+      VALUES (valor_x, valor_y);
+      ```
+
+- Modificar datos existentes en una tabla (UPDATE), al igual que con DELETE, es importante no olvidar el WHERE cuando escribimos la sentencia, aclarando la condición. 
+
+```
+UPDATE nombre_tabla
+SET columna_1 = valor_1, columna_2 = valor_2, ...
+WHERE condición;
+```
+
+- Eliminar datos de una tabla (DELETE):
+
+```
+DELETE FROM nombre_tabla WHERE condición;
+```
+
 ## Referencias
 
 [1] - [Tecnologías-información:link:](https://www.tecnologias-informacion.com/modelos-datos.html)
