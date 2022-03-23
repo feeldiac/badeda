@@ -200,7 +200,7 @@ Las sentencias SQL se agrupan en dos categorías según su funcionalidad o prop�
 
 - Podemos importar una base de datos directamente desde un archivo .sql, para ello seguimos la siguiente ruta: Server :point_right: Data Import :point_right: Import from Self-Contained File.
 
-### Create, Drop, Alter
+### CREATE, DROP, ALTER
 
 - Crear una base de datos:
 
@@ -248,7 +248,7 @@ DROP TABLE IF EXIST nombreTabla;
       ```
 
 
-### Insert, update, delete
+### INSERT, UPDATE, DELETE
 
 - Insertar datos a una tabla (INSERT). Existen dos formas:
    - Insertando datos en todas las columnas: Si estamos insertando datos en todas las columnas, no hace falta aclarar los nombres de cada columna. Sin embargo, el orden en el  que insertemos los valores, deberá ser el mismo orden que tengan asignadas las columnas en la tabla. 
@@ -278,7 +278,7 @@ WHERE condición;
 ```
 DELETE FROM nombre_tabla WHERE condición;
 ```
-### Select
+### SELECT
 
 Su funcionalidad es la de realizar consultas sobre una  o varias columnas de una tabla. Para especificar sobre qué tabla queremos realizar esa consulta usamos la palabra FROM seguida del nombre de la tabla. Con este comando podemos también modificar lo que visualizamos sin alterar los datos, por ejemplo, multiplicar los datos de una columna por algún valor.
 
@@ -329,6 +329,65 @@ ORDER BY nombre DESC;
 
 ![image](https://user-images.githubusercontent.com/75231007/158905647-6435d377-5411-44a4-8287-5eade293bfbb.png)
 
+### BETWEEN Y LIKE
+
+Cuando necesitamos obtener valores dentro de un rango, usamos el operador BETWEEN.
+- BETWEEN incluye los extremos.
+- BETWEEN funciona con números, textos y fechas.
+- Se usa como un filtro de un WHERE.
+
+```
+SELECT nombre, edad
+FROM alumnos
+WHERE edad BETWEEN 6 AND 12;
+```
+
+Cuando hacemos un filtro con un WHERE, podemos especificar un patrón de búsqueda que nos permita especificar algo concreto que queremos encontrar en los registros. Eso lo logramos utilizando comodines (wildcards).
+
+#### Comodines
+
+- COMODÍN % : es un sustituto que representa cero, uno, o varios caracteres.
+- COMODÍN _ : es un sustituto para un solo carácter.
+
+Por ejemplo, podríamos querer buscar:
+- Los nombres que tengan la letra 'a' como segundo carácter. 
+- Las direcciones postales que incluyan la calle 'Monroe'.
+- Los clientes que empiecen con 'Los' y terminen con 's’.
+
+**Ejemplo 1**: Devuelve aquellos nombres que tengan la letra 'a' como segundo carácter.
+
+```
+SELECT nombre
+FROM usuarios
+WHERE nombre LIKE '_a%';
+```
+   
+**Ejemplo 2**: Devuelve las direcciones de los usuarios que incluyan la calle 'Monroe'.
+
+```
+SELECT nombre
+FROM usuarios
+WHERE direccion LIKE '%Monroe%';
+```
+### LIMIT y OFFSET
+
+La funcionalidad de **LIMIT** es limitar el número de filas (registros/resultados) devueltas en las consultas SELECT. También establece el número máximo de registros a eliminar con DELETE.
+
+```
+SELECT nombre_columna1, nombre_columna2
+FROM nombre_tabla
+LIMIT cantidad_de_registros;
+```
+
+**OFFSET** nos permite especificar a partir de qué fila comenzar la recuperación de los datos solicitados. 
+
+Ejemplo: Al definir _offset_ como 20, los resultados empezarán desde la posición 21.
+```
+SELECT id, nombre, apellido
+FROM alumnos
+LIMIT 20
+OFFSET 20;
+```
 
 ## Referencias
 
