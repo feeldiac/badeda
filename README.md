@@ -388,6 +388,15 @@ FROM alumnos
 LIMIT 20
 OFFSET 20;
 ```
+### ALIAS
+
+Los **ALIAS** se usan para darle un nombre temporal y más amigable a las tablas, columnas y funciones. Los alias se definen durante una consulta y persisten solo durante esa consulta. Para definir un alias usamos las iniciales AS precediendo a la columna que estamos queriendo asignarle ese alias.
+
+```
+SELECT nombre_columna1 AS alias_nombre_columna1
+FROM nombre_tabla;
+```
+_De este modo, podemos darle alias a las columnas y tablas que vamos trayendo y hacer más legible la manipulación de datos, teniendo siempre presente que los alias no modifican los nombres originales en la base de datos._
 
 ## Referencias
 
