@@ -398,6 +398,86 @@ FROM nombre_tabla;
 ```
 _De este modo, podemos darle alias a las columnas y tablas que vamos trayendo y hacer más legible la manipulación de datos, teniendo siempre presente que los alias no modifican los nombres originales en la base de datos._
 
+### Funciones de agregación
+
+Las funciones de agregación realizan cálculos sobre un conjunto de datos y devuelven un único resultado. Excepto COUNT, las funciones de agregación ignorarán los valores NULL.
+
+#### COUNT
+
+Devuelve un único resultado indicando la cantidad de filas/registros que cumplen con el criterio.
+
+```
+SELECT COUNT(id) AS total FROM movies WHERE genre_id=3;
+```
+_Devuelve la cantidad de películas de la tabla movies con el genero_id 3 y lo muestra en una columna denominada total._
+
+#### AVG, SUM
+
+AVG (average) devuelve un único resultado indicando el promedio de una columna cuyo tipo de datos debe ser numérico.
+
+SUM (suma) devuelve un único resultado indicando la suma de una columna cuyo tipo de datos debe ser numérico.
+
+```
+SELECT AVG(rating) FROM movies;
+```
+_Devuelve el promedio del rating de las películas de la tabla movies._
+
+```
+SELECT SUM(length) FROM movies;
+```
+_Devuelve la suma de las duraciones de las películas de la tabla movies._
+
+#### MIN, MAX
+
+MIN devuelve un único resultado indicando el valor mínimo de una columna cuyo tipo de datos debe ser numérico.
+
+MAX devuelve un único resultado indicando el valor máximo de una columna cuyo tipo de datos debe ser numérico.
+
+```
+SELECT MIN(rating) FROM movies;
+```
+_Devolverá el rating de la película menos ranqueada._
+
+```
+SELECT MAX(length) FROM movies;
+```
+_Devolverá el rating de la película mejor ranqueada._
+
+### GROUP BY
+
+- Se usa para agrupar filas que contienen los mismos valores.
+- Opcionalmente, se utiliza junto con las funciones de agregación (SUM, AVG, COUNT, MIN, MAX) con el objetivo de producir reportes resumidos.
+- Las consultas que contienen la cláusula GROUP BY se denominan consultas agrupadas y solo devuelven una sola fila para cada elemento agrupado.
+
+```
+SELECT columna_1
+FROM nombre_tabla
+WHERE condition
+GROUP BY columna_1;
+```
+
+Ejemplo:
+```
+SELECT genero, AVG(duracion) AS duracion_promedio
+FROM pelicula
+GROUP BY genero;
+```
+_Devuelve el género y la duración promedio de cada grupo de géneros._
+
+### HAVING
+
+Cumple la misma función que WHERE, a diferencia de que HAVING permite la implementación de alias y funciones de agregación en las condiciones de la selección de datos.
+
+```
+SELECT pais, COUNT(clienteId)
+FROM clientes
+GROUP BY pais
+HAVING COUNT(clienteId)>=3;
+```
+
+_Esta consulta devolverá la cantidad de clientes por país (agrupados por país). Solamente se incluirán en el resultado aquellos países que tengan al menos 3 clientes._
+
+
 ## Referencias
 
 [1] - [Tecnologías-información:link:](https://www.tecnologias-informacion.com/modelos-datos.html)
