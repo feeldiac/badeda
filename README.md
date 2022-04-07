@@ -477,6 +477,135 @@ HAVING COUNT(clienteId)>=3;
 
 _Esta consulta devolverá la cantidad de clientes por país (agrupados por país). Solamente se incluirán en el resultado aquellos países que tengan al menos 3 clientes._
 
+### TABLE REFERENCE
+
+Hasta ahora vimos consultas (SELECT) dentro de una tabla. Pero también es posible y necesario hacer consultas a distintas tablas y unir los resultados.
+Por ejemplo, un posible escenario sería querer consultar una tabla en donde están los datos de los clientes y otra tabla en donde están los datos de las ventas a esos clientes.
+
+Seguramente, en la tabla de ventas, existirá un campo con el ID del cliente (cliente_id).
+Si quisiéramos mostrar todas las ventas de un cliente concreto, necesitaremos usar datos de ambas tablas y vincularlas con algún campo que compartan. En este caso, el cliente_id.
+
+```
+SELECT clientes.id AS ID, clientes.nombre, ventas.fecha
+FROM clientes, ventas
+WHERE clientes.id = ventas.cliente_id;
+```
+
+### JOINS
+
+Además de realizar consultas dentro de una tabla y de haber empleado table reference para consultas en múltiples tablas, existe la herramienta JOIN que nos permite hacer consultas a distintas tablas y unir los resultados.
+
+- Ventajas del uso de JOIN:
+- Su sintaxis es mucho más comprensible.
+- Presentan una mejor performance. 
+- Proveen de ciertas flexibilidades.
+
+El INNER JOIN es la opción predeterminada y nos devuelve todos los registros donde se cruzan dos o más tablas. Por ejemplo, si tenemos una tabla cliente y otra factura, al cruzarlas con INNER JOIN, nos devuelve aquellos registros o filas donde haya un valor coincidente en ambas tablas.
+
+Para definir el INNER JOIN tenemos que indicar el filtro por el cual se evaluará el cruce. Para esto, debemos utilizar la palabra reservada ON. Es decir, que lo que antes escribíamos en el WHERE de table reference, ahora lo escribiremos en el ON de INNER JOIN.
+
+```
+SELECT cliente.id, cliente.nombre, factura.fecha
+FROM cliente
+INNER JOIN factura 
+ON cliente.id = factura.cliente_id;
+```
+
+### DISTINCT
+
+En algunas situaciones, nos pueden solicitar un listado con registros no duplicados, para esto, utilizamos la cláusula DISTINCT que devuelve un listado en donde cada fila es distinta.
+
+**Ejemplo**: En este ejemplo vemos una query que pide los actores que hayan actuado en cualquier película de Harry Potter. Si no escribiéramos el DISTINCT, los actores que hayan participado en más de una película, aparecerán repetidos en el resultado.
+
+```
+SELECT DISTINCT actor.nombre, actor.apellido
+FROM actor
+INNER JOIN actor_pelicula 
+ON actor_pelicula.actor_id = actor.id
+INNER JOIN pelicula 
+ON pelicula.id = actor_pelicula.pelicula_id
+WHERE pelicula.titulo LIKE '%Harry Potter%';
+```
+
+### FUNCIONES DE ALTERACIÓN
+
+- CONCAT: sirve para concatenar dos o más expresiones.
+
+```
+SELECT CONCAT('Nombre: ', apellido, ', ', nombre, '.')
+FROM actor;
+```
+
+- COALESCE: sirve para sustituir el valor NULL en una sucesión de expresiones o campos. Es decir, si la primera expresión es Null, se sustituye con el valor de una segunda expresión.
+
+```
+SELECT COALESCE(NULL, 'Sin datos');
+```
+
+- DATEDIFF: sirve para devolver la diferencia entre dos fechas (en días), tomando como granularidad el intervalo especificado.
+
+```
+SELECT DATEDIFF('2021-02-03 12:45:00', '2021-01-01 07:00:00');
+```
+
+- TIMEDIFF: devuelve la diferencia entre dos horarios, tomando como granularidad el intervalo especificado.
+
+```
+  SELECT TIMEDIFF('18:45:00', '12:30:00');
+```
+
+- EXTRACT: para extraer partes de una fecha.
+
+```
+SELECT EXTRACT(SECOND FROM '2014-02-13 08:44:21');
+```
+
+```
+SELECT EXTRACT(MINUTE FROM '2014-02-13 08:44:21');
+```
+
+```
+SELECT EXTRACT(HOUR FROM '2014-02-13 08:44:21');
+```
+
+- REPLACE: sirve para reemplazar una cadena de caracteres por otro valor. Cabe aclarar que esta función hace distinción entre minúsculas y mayúsculas.
+
+```
+SELECT REPLACE('Buenas tardes', 'tardes', 'Noches');
+```
+
+- DATE_FORMAT: para cambiar el formato de salida de una fecha según una condición dada.
+
+```
+SELECT DATE_FORMAT('2017-06-15', '%W %M %e %Y');
+```
+
+- DATE_ADD: para sumar o agregar un período de tiempo a un valor de tipo DATE o DATETIME.
+
+```
+SELECT DATE_ADD('2021-06-30', INTERVAL '3' DAY);
+```
+
+- DATE_SUB: para restar o quitar un período de tiempo a un valor de tipo DATE o DATETIME.
+
+```
+SELECT DATE_SUB('2021-06-30', INTERVAL '9' MONTH);
+```
+
+- CASE: para evaluar condiciones y devolver la primera condición que se cumpla. 
+
+En este ejemplo, la tabla resultante tendrá 4 columnas: id, titulo, rating, calificacion. Esta última columna mostrará los valores: Mala, Regular, Buena y Excelente; según el rating de la película.
+
+```
+SELECT id, titulo, rating,
+    CASE
+      WHEN rating < 4 THEN 'Mala'
+      WHEN rating BETWEEN 4 AND 6 THEN 'Regular'
+      WHEN rating BETWEEN 7 AND 9 THEN 'Buena'
+      ELSE 'Excelente'
+    END AS calificacion
+  FROM pelicula;
+```
 
 ## Referencias
 
