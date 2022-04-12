@@ -500,7 +500,12 @@ Además de realizar consultas dentro de una tabla y de haber empleado table refe
 - Presentan una mejor performance. 
 - Proveen de ciertas flexibilidades.
 
-El INNER JOIN es la opción predeterminada y nos devuelve todos los registros donde se cruzan dos o más tablas. Por ejemplo, si tenemos una tabla cliente y otra factura, al cruzarlas con INNER JOIN, nos devuelve aquellos registros o filas donde haya un valor coincidente en ambas tablas.
+![image](https://user-images.githubusercontent.com/75231007/163020443-96ad8488-353a-4b0f-bf02-533ed5cd8e0e.png)
+
+
+#### INNER JOIN 
+
+Es la opción predeterminada y nos devuelve todos los registros donde se cruzan dos o más tablas, es decir los registros que cumplen la condición indicada en la cláusula ON. Por ejemplo, si tenemos una tabla cliente y otra factura, al cruzarlas con INNER JOIN, nos devuelve aquellos registros o filas donde haya un valor coincidente en ambas tablas. 
 
 Para definir el INNER JOIN tenemos que indicar el filtro por el cual se evaluará el cruce. Para esto, debemos utilizar la palabra reservada ON. Es decir, que lo que antes escribíamos en el WHERE de table reference, ahora lo escribiremos en el ON de INNER JOIN.
 
@@ -509,6 +514,52 @@ SELECT cliente.id, cliente.nombre, factura.fecha
 FROM cliente
 INNER JOIN factura 
 ON cliente.id = factura.cliente_id;
+```
+
+#### LEFT JOIN
+
+El LEFT JOIN entre dos tablas devuelve todos los registros de la primera tabla (en este caso sería la tabla A), incluso cuando los registros no cumplan la condición indicada en la cláusula ON.
+
+```
+SELECT columna1, columna2, …
+FROM tabla A
+LEFT JOIN tabla B
+ON condicion;
+```
+
+#### LEFT Excluding JOIN
+
+Este tipo de LEFT JOIN nos devuelve únicamente los registros de una primera tabla (A), excluyendo los registros que cumplan con la condición indicada en la cláusula ON. Por ejemplo, si tenemos una tabla cliente y otra factura, al cruzarlas, nos devuelve solo aquellos registros de clientes que no tengan una factura asignada.
+
+```
+SELECT factura.id AS nro_factura, apellido, nombre, fecha
+FROM cliente
+LEFT JOIN factura
+ON cliente.id = factura.cliente_id
+WHERE factura.id IS NULL;
+```
+
+#### RIGHT JOIN
+
+El RIGHT JOIN entre dos tablas devuelve todos los registros de la segunda tabla, incluso cuando los registros no cumplan la condición indicada en la cláusula ON. Por ejemplo, si tenemos una tabla cliente y otra factura, al cruzarlas, nos devuelve aquellos registros donde haya un valor coincidente entre ambas, más los registros de aquellas facturas que no tengan un cliente asignado.
+
+```
+SELECT factura.id AS nro_factura, apellido, nombre, fecha
+FROM cliente
+RIGHT JOIN factura
+ON cliente.id = factura.cliente_id;
+```
+
+#### RIGHT Excluding JOIN
+
+Este tipo de RIGTH JOIN nos devuelve únicamente los registros de una segunda tabla (B), excluyendo los registros que cumplan con la condición indicada en la cláusula ON. Por ejemplo, si tenemos una tabla cliente y otra factura, al cruzarlas, nos devuelve solo aquellos registros de facturas que no tengan asignado un cliente.
+
+```
+SELECT factura.id AS nro_factura, apellido, nombre, fecha
+FROM cliente
+RIGHT JOIN factura
+ON cliente.id = factura.cliente_id
+WHERE cliente.id IS NULL;
 ```
 
 ### DISTINCT
